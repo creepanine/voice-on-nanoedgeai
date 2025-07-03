@@ -17,7 +17,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_wei
 
 # 训练模型
 # 使用 fit 方法进行模型训练，通过指定 epochs 和 batch_size，模型会在训练集上进行迭代学习
-history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=16, callbacks=[early_stopping],verbose=1)
+history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=100, batch_size=16, callbacks=[early_stopping],verbose=1)
 
 # 在测试集上评估模型
 loss, accuracy = model.evaluate(X_test, y_test)
