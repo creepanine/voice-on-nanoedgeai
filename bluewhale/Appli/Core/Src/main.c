@@ -64,6 +64,7 @@ DMA_HandleTypeDef handle_HPDMA1_Channel0;
 LTDC_HandleTypeDef hltdc;
 
 UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 LTDC_HandleTypeDef hltdc;
@@ -73,7 +74,6 @@ static __IO uint32_t NbMainFrames = 0;
 static IMX335_Object_t   IMX335Obj;
 static int32_t isp_gain;
 static int32_t isp_exposure;
-//uint8_t rgb_data[160 * 120 * 3];
 CACHEAXI_HandleTypeDef hcacheaxi;
 /* USER CODE END PV */
 
@@ -89,6 +89,7 @@ static void MX_I2C2_Init(void);
 static void MX_ICACHE_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_USART3_UART_Init(void);
 static void SystemIsolation_Config(void);
 /* USER CODE BEGIN PFP */
 static void Enable_NPU_RAM_ForCore(void);
@@ -102,10 +103,7 @@ static ISP_StatusTypeDef SetSensorGainHelper(uint32_t Instance, int32_t Gain);
 static ISP_StatusTypeDef GetSensorGainHelper(uint32_t Instance, int32_t *Gain);
 static ISP_StatusTypeDef SetSensorExposureHelper(uint32_t Instance, int32_t Exposure);
 static ISP_StatusTypeDef GetSensorExposureHelper(uint32_t Instance, int32_t *Exposure);
-//void PrintCroppedImage(void);
-//void PreprocessImage(void);
 void FaceDetect(void);
-void EmoDetect(void);
 void PrepareCamera(void);
 /* USER CODE END PFP */
 
@@ -169,10 +167,10 @@ int main(void)
   MX_ICACHE_Init();
   MX_LTDC_Init();
   MX_USART1_UART_Init();
+  MX_USART3_UART_Init();
   MX_CACHEAXI_Init();
   MX_X_CUBE_AI_Init();
   SystemIsolation_Config();
-  //printf("hello");
   PrepareCamera();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
@@ -506,6 +504,7 @@ static void MX_LTDC_Init(void)
   HAL_RIF_RIMC_ConfigMasterAttributes(RIF_MASTER_INDEX_GPU2D, &RIMC_master);
   HAL_RIF_RIMC_ConfigMasterAttributes(RIF_MASTER_INDEX_LTDC1, &RIMC_master);
   HAL_RIF_RIMC_ConfigMasterAttributes(RIF_MASTER_INDEX_NPU, &RIMC_master);
+
   /*RISUP configuration*/
   HAL_RIF_RISC_SetSlaveSecureAttributes(RIF_RISC_PERIPH_INDEX_CRC , RIF_ATTRIBUTE_SEC | RIF_ATTRIBUTE_PRIV);
   HAL_RIF_RISC_SetSlaveSecureAttributes(RIF_RISC_PERIPH_INDEX_DMA2D , RIF_ATTRIBUTE_SEC | RIF_ATTRIBUTE_PRIV);
@@ -519,6 +518,7 @@ static void MX_LTDC_Init(void)
   HAL_RIF_RISC_SetSlaveSecureAttributes(RIF_RISC_PERIPH_INDEX_XSPI1 , RIF_ATTRIBUTE_SEC | RIF_ATTRIBUTE_PRIV);
   HAL_RIF_RISC_SetSlaveSecureAttributes(RIF_RISC_PERIPH_INDEX_XSPI2 , RIF_ATTRIBUTE_SEC | RIF_ATTRIBUTE_PRIV);
   HAL_RIF_RISC_SetSlaveSecureAttributes(RIF_RISC_PERIPH_INDEX_NPU , RIF_ATTRIBUTE_SEC | RIF_ATTRIBUTE_PRIV);
+
   /* RIF-Aware IPs Config */
 
   /* set up HPDMA configuration */
@@ -548,6 +548,8 @@ static void MX_LTDC_Init(void)
   HAL_GPIO_ConfigPinAttributes(GPIOB,GPIO_PIN_13,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
   HAL_GPIO_ConfigPinAttributes(GPIOB,GPIO_PIN_14,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
   HAL_GPIO_ConfigPinAttributes(GPIOB,GPIO_PIN_15,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
+  HAL_GPIO_ConfigPinAttributes(GPIOC,GPIO_PIN_10,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
+  HAL_GPIO_ConfigPinAttributes(GPIOC,GPIO_PIN_11,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
   HAL_GPIO_ConfigPinAttributes(GPIOC,GPIO_PIN_13,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
   HAL_GPIO_ConfigPinAttributes(GPIOD,GPIO_PIN_0,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
   HAL_GPIO_ConfigPinAttributes(GPIOD,GPIO_PIN_4,GPIO_PIN_SEC|GPIO_PIN_NPRIV);
@@ -669,6 +671,54 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
+  * @brief USART3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART3_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART3_Init 0 */
+
+  /* USER CODE END USART3_Init 0 */
+
+  /* USER CODE BEGIN USART3_Init 1 */
+
+  /* USER CODE END USART3_Init 1 */
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 115200;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart3.Init.ClockPrescaler = UART_PRESCALER_DIV1;
+  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_UARTEx_DisableFifoMode(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART3_Init 2 */
+
+  /* USER CODE END USART3_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -681,11 +731,11 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOQ_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOO_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
@@ -1022,61 +1072,6 @@ void HAL_DCMIPP_PIPE_VsyncEventCallback(DCMIPP_HandleTypeDef *hdcmipp, uint32_t 
   }
 }
 
-
-//void PrintCroppedImage(void)
-//{
-//    uint16_t *frame = (uint16_t *)BUFFER_ADDRESS;
-//    for(int y = CROP_Y; y < CROP_Y + CROP_H; y++)
-//    {
-//        for(int x = CROP_X; x < CROP_X + CROP_W; x++)
-//        {
-//            uint16_t pixel = frame[y * 200 + x];
-//
-//            uint8_t r = (pixel >> 11) & 0x1F;
-//            uint8_t g = (pixel >> 5) & 0x3F;
-//            uint8_t b = pixel & 0x1F;
-//
-//            // 平滑扩展到8位
-//            r = (r << 3) | (r >> 2);
-//            g = (g << 2) | (g >> 4);
-//            b = (b << 3) | (b >> 2);
-//
-//            //printf("%d,%d,%d;", r, g, b);
-//        }
-//    }
-//    //printf("\n");
-//}
-//void PreprocessImage(void)
-//{
-//    uint16_t *frame = (uint16_t *)BUFFER_ADDRESS;
-//
-//    // 1. 裁剪并转换RGB565到RGB888
-//    for(int y = 0; y < CROP_H; y++)
-//    {
-//        for(int x = 0; x < CROP_W; x++)
-//        {
-//            // 从原始帧缓冲区读取像素
-//            uint16_t pixel = frame[(CROP_Y + y) * 200 + (CROP_X + x)];
-//
-//            // RGB565转RGB888
-//            uint8_t r = (pixel >> 11) & 0x1F;
-//            uint8_t g = (pixel >> 5) & 0x3F;
-//            uint8_t b = pixel & 0x1F;
-//
-//            // 平滑扩展到8位
-//            r = (r << 3) | (r >> 2);
-//            g = (g << 2) | (g >> 4);
-//            b = (b << 3) | (b >> 2);
-//
-//            // 存储为RGB格式 (已经是RGB，无需BGR转RGB)
-//            int idx = (y * CROP_W + x) * 3;
-//            rgb_data[idx + 0] = r;  // R
-//            rgb_data[idx + 1] = g;  // G
-//            rgb_data[idx + 2] = b;  // B
-//        }
-//    }
-//}
-
 void PrepareCamera(void){
 	ISP_AppliHelpersTypeDef appliHelpers = {0};
 		  DCMIPP_DecimationConfTypeDef pDecConfig = {0};
@@ -1137,19 +1132,6 @@ void FaceDetect(void){
 	  NbMainFrames = 0;
 }
 
-void EmoDetect(void){
-	printf("start use ai\n");
-	  if (HAL_DCMIPP_CSI_PIPE_Start(&hdcmipp, DCMIPP_PIPE1, DCMIPP_VIRTUAL_CHANNEL0 , BUFFER_ADDRESS, DCMIPP_MODE_SNAPSHOT) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-	  printf("start use ai\n");
-	  //MX_X_CUBE_AI_Init();
-	  MX_X_CUBE_AI_Process_emo();
-	  printf("start use ai\n");
-	  NbMainFrames = 0;
-}
-
 #ifdef __GNUC__
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
@@ -1158,7 +1140,7 @@ void EmoDetect(void){
 
 PUTCHAR_PROTOTYPE
 {
-    HAL_UART_Transmit(&huart1, (uint8_t*)&ch,1,HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart3, (uint8_t*)&ch,1,HAL_MAX_DELAY);
     return ch;
 }
 

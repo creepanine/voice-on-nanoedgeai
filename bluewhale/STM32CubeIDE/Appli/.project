@@ -1157,19 +1157,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/FontCache.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/Font_mvboli_100_4bpp_0.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Font_mvboli_100_4bpp_0.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/generated/Font_mvboli_30_4bpp_0.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Font_mvboli_30_4bpp_0.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Font_mvboli_40_4bpp_0.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Font_mvboli_40_4bpp_0.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/GeneratedFont.cpp</name>
@@ -1177,34 +1167,14 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/GeneratedFont.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/Kerning_mvboli_100_4bpp.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Kerning_mvboli_100_4bpp.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/generated/Kerning_mvboli_30_4bpp.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Kerning_mvboli_30_4bpp.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/Kerning_mvboli_40_4bpp.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Kerning_mvboli_40_4bpp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Table_mvboli_100_4bpp.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Table_mvboli_100_4bpp.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/generated/Table_mvboli_30_4bpp.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Table_mvboli_30_4bpp.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/Table_mvboli_40_4bpp.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/fonts/src/Table_mvboli_40_4bpp.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/UnmappedDataFont.cpp</name>
@@ -1237,39 +1207,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/SVGDatabase.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_alternate_theme_images_widgets_lineprogress_backgrounds_line_thick_large_0.cpp</name>
+			<name>Application/User/generated/image_background.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_lineprogress_backgrounds_line_thick_large_0.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_clay_theme_images_widgets_textprogress_backgrounds_round_neutral.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_clay_theme_images_widgets_textprogress_backgrounds_round_neutral.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_icon_theme_images_editor_insert_emoticon_50_50_000000.svg.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_icon_theme_images_editor_insert_emoticon_50_50_000000.svg.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_light_theme_images_backgrounds_800x480_shattered_rain.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_light_theme_images_backgrounds_800x480_shattered_rain.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_light_theme_images_bars_800x480_bottom_dim_light.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_light_theme_images_bars_800x480_bottom_dim_light.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_light_theme_images_widgets_button_icon_round_large_fill_normal.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_light_theme_images_widgets_button_icon_round_large_fill_normal.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_light_theme_images_widgets_button_icon_round_large_outline_action.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/__generated/image_light_theme_images_widgets_button_icon_round_large_outline_action.cpp</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/Appli/TouchGFX/generated/images/src/image_background.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/LanguageGb.cpp</name>

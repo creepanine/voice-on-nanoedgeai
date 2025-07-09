@@ -226,17 +226,17 @@ void MX_X_CUBE_AI_Process(void)
     total_faces_detected += num_faces;
 
     // 输出结果 (对应Python代码的可视化部分)
-    printf("=== Frame %lu ===\n", total_frames_processed);
-    printf("Detected %d faces:\n", num_faces);
+//    printf("=== Frame %lu ===\n", total_frames_processed);
+//    printf("Detected %d faces:\n", num_faces);
 
     for(int i = 0; i < num_faces; i++)
     {
-        printf("%s %d: (%d,%d)-(%d,%d), confidence: %.2f\n",
-               class_names[final_detections[i].class_id],
-               i+1,
-               final_detections[i].x1, final_detections[i].y1,
-               final_detections[i].x2, final_detections[i].y2,
-               final_detections[i].confidence);
+//        printf("%s %d: (%d,%d)-(%d,%d), confidence: %.2f\n",
+//               class_names[final_detections[i].class_id],
+//               i+1,
+//               final_detections[i].x1, final_detections[i].y1,
+//               final_detections[i].x2, final_detections[i].y2,
+//               final_detections[i].confidence);
 
         LL_ATON_DECLARE_NAMED_NN_INSTANCE_AND_INTERFACE(emotion)
         const LL_Buffer_InfoTypeDef * ibuffersInfosemo = NN_Interface_emotion.input_buffers_info();
@@ -330,18 +330,20 @@ void MX_X_CUBE_AI_Process(void)
           strcpy(predicted_emotion, emotion_labels[max_index]);
           confidence = predictions[max_index];
 
+          printf("%d%d\n",num_faces,max_index);
+
           // 输出结果 (对应Python代码的显示部分)
-          printf("=== Emotion Recognition Result ===\n");
-          printf("Face at (%d,%d)-(%d,%d)\n",
-                 final_detections[0].x1, final_detections[0].y1,
-                 final_detections[0].x2, final_detections[0].y2);
-          printf("Predicted emotion: %s\n", predicted_emotion);
-          printf("Confidence: %.2f%%\n", confidence * 100.0f);
-          printf("All predictions:\n");
-          for(int i = 0; i < 7; i++) {
-              printf("  %s: %.2f%%\n", emotion_labels[i], predictions[i] * 100.0f);
-          }
-          printf("=================================\n");
+//          printf("=== Emotion Recognition Result ===\n");
+//          printf("Face at (%d,%d)-(%d,%d)\n",
+//                 final_detections[0].x1, final_detections[0].y1,
+//                 final_detections[0].x2, final_detections[0].y2);
+//          printf("Predicted emotion: %s\n", predicted_emotion);
+//          printf("Confidence: %.2f%%\n", confidence * 100.0f);
+//          printf("All predictions:\n");
+//          for(int i = 0; i < 7; i++) {
+//              printf("  %s: %.2f%%\n", emotion_labels[i], predictions[i] * 100.0f);
+//          }
+//          printf("=================================\n");
 
           /* Invalidate the associated CPU cache region if requested */
           //_post_process(buffer_out);
@@ -354,11 +356,12 @@ void MX_X_CUBE_AI_Process(void)
     }
 
     if(num_faces == 0) {
-        printf("No faces detected\n");
+    	//printf("No faces detected\n");
+    	printf("%d%d\n",num_faces,num_faces);
     }
 
-    printf("Total faces detected: %lu\n", total_faces_detected);
-    printf("==================\n");
+//    printf("Total faces detected: %lu\n", total_faces_detected);
+//    printf("==================\n");
     /* Post-process the output buffer */
     /* Invalidate the associated CPU cache region if requested */
     //_post_process(buffer_out);
